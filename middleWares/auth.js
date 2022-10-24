@@ -13,7 +13,7 @@ exports.authToken = (req,res,next) => {
       next();
     }
     catch(err){
-       return res.status(401).json({msg:"token invalid or expired 111"})
+       return res.status(401).json({msg:"token invalid or expired"})
     }
 }
 

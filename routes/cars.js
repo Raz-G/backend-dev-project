@@ -36,12 +36,12 @@ router.get("/" , async(req,res)=> {
     }
   })
   router.get("/prices",async(req,res) => {
-    try{
-  let queryMin = req.query.min;
-  let queryMax = req.query.max;
-  let data = await CarsModel.find({price:{"$gt":queryMin ,"$lt":queryMax}})
-      .limit(50)
-      res.json(data);
+    let queryMin = req.query.min || 0;
+    let queryMax = req.query.max || 10000000000 ; 
+   try{
+     let data = await CarsModel.find({$and:[{price: {$gte: queryMin} } , { price:{ $lte:queryMax }}]}) ;
+     res.json(data)
+     
     }
     catch(err){
       console.log(err);
