@@ -10,16 +10,6 @@ router.get("/",(req,res)  => {
     res.json({msg:"Users work please Sign Up"})
 })
 
-router.get("/usersList" , authAdmin, async(req,res) => {
-    try{
-      let data = await UsersModel.find({},{password:0});
-      res.json(data)
-    }
-    catch(err){
-      console.log(err)
-      res.status(500).json({msg:"err",err})
-    }  
-  })
 
 router.get("/userInfo", authToken, async(req,res)  => { 
 let user = await UsersModel.findOne({_id:req.tokenData._id},{pass:0})
